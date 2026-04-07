@@ -1,0 +1,13 @@
+<div class="date-strip">
+  <div
+    *ngFor="let date of dates"
+    class="date-pill"
+    [class.date-pill--active]="date.value === selectedDate"
+    (click)="selectDate(date.value)"
+  >
+    <span class="date-pill__day">{{ date.dayShort }}</span>
+    <span class="date-pill__num">{{ date.dayNumber }}</span>
+
+    <div *ngIf="date.isToday" class="date-pill__today-dot"></div>
+  </div>
+</div>

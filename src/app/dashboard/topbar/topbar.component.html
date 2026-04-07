@@ -1,0 +1,23 @@
+
+<header class="topbar">
+
+  <div class="topbar__logo">
+    <div class="topbar__emblem">GC</div>
+    <span class="topbar__name">Galaxy Billiard</span>
+  </div>
+
+  <span class="topbar__badge">Owner Dashboard</span>
+
+  <div class="topbar__right">
+    <button class="topbar__btn topbar__btn--create" (click)="createReservationClicked.emit()">
+      + New Reservation
+    </button>
+
+    <button class="topbar__btn topbar__btn--refresh" (click)="refreshClicked.emit()" title="Refresh">
+      ↻
+    </button>
+
+    <div class="topbar__clock">{{ currentTime }}</div>
+  </div>
+
+</header>

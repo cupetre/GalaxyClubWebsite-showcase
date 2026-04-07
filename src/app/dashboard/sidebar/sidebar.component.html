@@ -1,0 +1,63 @@
+<aside class="sidebar">
+  <div class="sidebar__header">
+    <div class="sidebar__title">Active Session</div>
+    <div class="sidebar__sub">Click a reservation block to manage</div>
+  </div>
+
+  <div class="sidebar__body">
+    <ng-container *ngIf="sessionCards.length > 0; else emptyState">
+      <div
+        *ngFor="let item of sessionCards"
+        class="session-card"
+        [class.session-card--running]="item.session.running"
+        [class.session-card--ended]="item.session.totalPaid !== null"
+      >
+        <div class="session-card__top">
+          <div class="session-card__info">
+            <div class="session-card__name">{{ item.reservation.name }}</div>
+            <div class="session-card__meta">
+              {{ item.reservation.phone }} · {{ item.reservation.startTime }}–{{ item.reservation.endTime }}
+            </div>
+          </div>
+          <span class="session-card__table-badge">T{{ item.reservation.table }}</span>
+        </div>
+
+        <div class="session-card__timer">
+          <div
+            class="session-card__timer-display"
+            [class.session-card__timer-display--running]="item.session.running"
+          >
+            {{ formatSec(item.session.elapsedSec) }}
+          </div>
+          <div class="session-card__timer-label">{{ getStatusLabel(item.session) }}</div>
+        </div>
+
+        <div class="session-card__actions">
+          <button
+            *ngIf="item.session.running"
+            class="btn-sm btn-sm--stop"
+            (click)="stopClicked.emit(item.reservation.id)"
+          >
+            ■ Stop
+          </button>
+
+          <button
+            *ngIf="!item.session.running"
+            class="btn-sm btn-sm--start"
+            (click)="startClicked.emit(item.reservation.id)"
+          >
+            ▶ Start Timer
+          </button>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #emptyState>
+      <div class="sidebar__empty">
+        <div class="sidebar__empty-icon">🎱</div>
+        <span>No active session.<br />Click a reservation block to start.</span>
+      </div>
+    </ng-template>
+  </div>
+
+</aside>

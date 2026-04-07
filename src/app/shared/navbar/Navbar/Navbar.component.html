@@ -1,0 +1,29 @@
+<nav class="navbar" id="navbar">
+
+  <a href="#home" class="navbar__logo">
+    <!-- Replace src with your actual logo path -->
+    <img
+      class="navbar__logo-img"
+      src="assets/logo.png"
+      alt="Galaxy Club Logo"
+    />
+    <span class="navbar__logo-name">Galaxy Club</span>
+  </a>
+
+  <!-- Hamburger button — visible on mobile only -->
+  <button class="navbar__hamburger" (click)="toggleMenu()" [class.navbar__hamburger--open]="menuOpen">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <!-- Links — collapse on mobile -->
+  <ul class="navbar__links" [class.navbar__links--open]="menuOpen">
+    <li><a href="#home"     class="navbar__link" (click)="closeMenu()">Home</a></li>
+    <li><a href="#about"    class="navbar__link" (click)="closeMenu()">About</a></li>
+    <li><a href="menu.html" class="navbar__link" (click)="closeMenu()">Menu</a></li>
+    <li><a href="#reserve"  class="navbar__link" (click)="closeMenu()">Reserve</a></li>
+    <li><a href="#contact"  class="navbar__link" (click)="closeMenu()">Contact</a></li>
+  </ul>
+
+</nav>

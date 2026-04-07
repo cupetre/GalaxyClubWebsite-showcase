@@ -1,0 +1,93 @@
+<div class="dashboard">
+  <app-topbar
+  (createReservationClicked)="openCreateModal()"
+  (refreshClicked)="refreshDashboard()">
+
+  </app-topbar>
+
+  <main class="main">
+    <app-date-strip
+    [selectedDate]="selectedDate"
+    [dates]="dates"
+    (dateSelected)="onDateSelected($event)">
+    </app-date-strip>
+
+    <app-tables-grid
+    [selectedDate]="selectedDate"
+    [dayReservations]="dayReservations"
+    [sessions]="sessions"
+      [allSlots]="allSlots"
+      (sessionOpened)="openSession($event)">
+    </app-tables-grid>
+  </main>
+
+  <app-sidebar [sessions]="sessions" [reservations]="dayReservations" (startClicked)="startSession($event)"
+    (stopClicked)="stopSession($event)">
+  </app-sidebar>
+</div>
+
+<div class="modal-overlay"
+*ngIf="showCreateModal"
+(click)="onOverlayClick($event)"
+>
+  <div class="modal" id="createModal" (click)="$event.stopPropagation()">
+
+    <div class="modal__header">
+      <h3 class="modal__title">New Reservation</h3>
+      <button type="button" class="modal__close" (click)="closeCreateModal()">✕</button>
+    </div>
+
+    <div class="modal__body">
+
+      <div class="modal__field">
+        <label class="modal__label">Full Name</label>
+        <input class="modal__input" type="text" placeholder="e.g. Aleksandar M." #rName />
+      </div>
+
+      <div class="modal__field">
+        <label class="modal__label">Phone Number</label>
+        <input class="modal__input" type="tel" placeholder="e.g. 070-111-222" #rPhone />
+      </div>
+
+      <div class="modal__field">
+        <label class="modal__label">Select Date</label>
+        <select class="modal__select" [(ngModel)]="selectedModalDate" (change)="onModalDateChange()">
+          <option value="">— Choose a date —</option>
+          <option *ngFor="let d of dates" [value]="d.value">
+            {{ d.label }}
+          </option>
+        </select>
+      </div>
+
+      <div class="modal__field" *ngIf="showTimeSection">
+        <label class="modal__label">
+          Select Time
+          <span class="modal__label-hint">(max 4h · 14:00–00:00)</span>
+        </label>
+
+        <div class="modal__time-grid" *ngIf="showTimeSection">
+          <button type="button" *ngFor="let slot of allSlots; let i = index" class="time-btn"
+            [class.time-btn--selected]="i === modalStartSlot || i === modalEndSlot"
+            [class.time-btn--in-range]="modalStartSlot !== null && modalEndSlot !== null && i > modalStartSlot && i < modalEndSlot"
+            (click)="selectModalTime(i)">
+            {{ slot }}
+          </button>
+        </div>
+
+        <p class="modal__time-hint">{{ modalTimeHint }}</p>
+      </div>
+
+    </div>
+
+    <div class="modal__actions">
+      <button type="button" class="modal__btn modal__btn--primary" (click)="createReservation(rName.value , rPhone.value)">
+        Create Reservation
+      </button>
+
+      <button type="button" class="modal__btn modal__btn--outline" (click)="closeCreateModal()">
+        Cancel
+      </button>
+    </div>
+
+  </div>
+</div>

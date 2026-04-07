@@ -1,0 +1,202 @@
+:host {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #1a1a1a;
+  border-left: 1px solid var(--color-border);
+}
+
+.sidebar__header {
+  padding: 18px 20px 14px;
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.sidebar__title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  margin-bottom: 2px;
+}
+
+.sidebar__sub {
+  font-size: 0.6rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.sidebar__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 10px;
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  text-align: center;
+  padding: 24px;
+}
+
+.sidebar__empty-icon {
+  font-size: 2rem;
+  opacity: 0.4;
+}
+
+/* Session card */
+.session-card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 14px 16px;
+  transition: border-color var(--transition);
+}
+.session-card--running { border-color: rgba(39,174,96,0.5); }
+.session-card--ended   { border-color: var(--color-border); opacity: 0.65; }
+
+.session-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.session-card__name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  margin-bottom: 3px;
+}
+
+.session-card__meta {
+  font-size: 0.62rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+}
+
+.session-card__table-badge {
+  font-size: 0.58rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border: 1px solid rgba(200,169,110,0.3);
+  border-radius: 2px;
+  color: var(--color-gold);
+}
+
+.session-card__timer {
+  text-align: center;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+
+.session-card__timer-display {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--color-text-primary);
+  letter-spacing: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.session-card__timer-display--running { color: var(--color-green-ok); }
+
+.session-card__timer-label {
+  font-size: 0.58rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-top: 2px;
+}
+
+.session-card__cost {
+  text-align: center;
+  padding: 8px;
+  background: var(--color-bg-raised);
+  border-radius: 3px;
+  margin-bottom: 12px;
+}
+
+.session-card__cost-amount {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  color: var(--color-gold);
+}
+
+.session-card__cost-label {
+  font-size: 0.58rem;
+  color: var(--color-text-muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.session-card__actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Confirm step — shown when owner presses Stop */
+.session-card__confirm {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.session-card__confirm-text {
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+  font-style: italic;
+}
+
+.session-card__confirm-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Small buttons */
+.btn-sm {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 0.62rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.btn-sm--start {
+  background: rgba(39,174,96,0.15);
+  color: #5dbb7e;
+  border: 1px solid rgba(39,174,96,0.32);
+}
+.btn-sm--start:hover { background: rgba(39,174,96,0.26); }
+
+.btn-sm--stop {
+  background: rgba(192,57,43,0.15);
+  color: #e06b5e;
+  border: 1px solid rgba(192,57,43,0.32);
+}
+.btn-sm--stop:hover { background: rgba(192,57,43,0.26); }
+
+.btn-sm--disabled {
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  cursor: not-allowed;
+  opacity: 0.5;
+}

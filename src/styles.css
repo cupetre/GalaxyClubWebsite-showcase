@@ -1,0 +1,164 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root {
+  --color-gold:         #c8a96e;
+  --color-gold-light:   #dfc08e;
+  --color-gold-muted:   rgba(200,169,110,0.18);
+  --color-green-deep:   #1e3a28;
+  --color-green-mid:    #2a4e36;
+  --color-bg:           #1a1a1a;
+  --color-bg-raised:    #222222;
+  --color-bg-card:      #272727;
+  --color-bg-input:     #1e1e1e;
+  --color-text-primary: #e8e0d0;
+  --color-text-secondary:#a89880;
+  --color-text-muted:   #6e6358;
+  --color-border:       #333333;
+  --color-border-light: #3e3e3e;
+
+  --font-serif:   'Cormorant Garamond', Georgia, serif;
+  --font-sans:    'Montserrat', sans-serif;
+
+  --radius-sm:    3px;
+  --radius-md:    6px;
+  --transition:   0.25s ease;
+}
+
+/* ═══════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════ */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  font-size: 15px;
+  line-height: 1.6;
+}
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+
+/* ═══════════════════════════════════════════════
+   LAYOUT HELPERS
+═══════════════════════════════════════════════ */
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+section { padding: 96px 0; }
+
+/* ═══════════════════════════════════════════════
+   SECTION LABELS & TITLES (shared)
+═══════════════════════════════════════════════ */
+
+.section__label {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 10px;
+}
+
+.section__title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  color: var(--color-text-primary);
+  margin-bottom: 14px;
+}
+
+.section__divider {
+  width: 48px;
+  height: 1px;
+  background: var(--color-gold);
+  margin-bottom: 40px;
+  opacity: 0.7;
+}
+
+/* ═══════════════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════════════ */
+.btn {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  padding: 13px 32px;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.btn--primary {
+  background: var(--color-gold);
+  color: #111;
+}
+.btn--primary:hover {
+  background: var(--color-gold-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(200,169,110,0.25);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--color-gold);
+  border: 1px solid rgba(200,169,110,0.55);
+}
+.btn--outline:hover {
+  background: var(--color-gold-muted);
+  border-color: var(--color-gold);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border-light);
+}
+.btn--ghost:hover {
+  color: var(--color-gold);
+  border-color: rgba(200,169,110,0.5);
+}
+
+.toast {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  z-index: 3000;
+  background: var(--color-green-deep);
+  border: 1px solid rgba(200,169,110,0.4);
+  color: var(--color-text-primary);
+  padding: 13px 22px;
+  font-size: 0.82rem;
+  border-radius: var(--radius-sm);
+  transform: translateX(120%);
+  transition: transform 0.3s ease;
+  font-family: var(--font-sans);
+}
+
+.toast--show { transform: translateX(0); }
+
+@media (max-width: 900px) {
+  .contact__info-row { grid-template-columns: repeat(2, 1fr); }
+  .contact__bottom-row { grid-template-columns: 1fr; }
+  .contact__map { height: 280px; }
+  .stats-bar__grid { flex-direction: column; gap: 36px; }
+  .stats-bar__divider { width: 60px; height: 1px; }
+}
+
+@media (max-width: 640px) {
+  .navbar { padding: 0 20px; }
+  .navbar__links { gap: 18px; }
+  .container { padding: 0 20px; }
+  .reserve-card { padding: 28px 20px; }
+  .modal { padding: 32px 24px; }
+  .contact__info-row { grid-template-columns: 1fr 1fr; }
+  .contact-form__name-row { grid-template-columns: 1fr; }
+}

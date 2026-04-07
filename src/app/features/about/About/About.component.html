@@ -1,0 +1,61 @@
+<section class="about" id="about">
+  <div class="container">
+    <p class="section__label">Our Story</p>
+    <h2 class="section__title">More Than a Game</h2>
+    <div class="section__divider"></div>
+
+    <p class="about__description">
+      Galaxy Billiard was born from a simple idea — that billiards deserves a home as refined as the game itself.
+      We built a space where players of all levels enjoy premium tables, expertly crafted coffee, and an
+      atmosphere that feels both social and sophisticated. From weekly tournaments to quiet solo evenings,
+      every visit is worth remembering.
+    </p>
+
+    <div class="gallery">
+      <div class="gallery__main-wrap">
+        <button class="gallery__nav gallery__nav--prev" type="button" (click)="moveGallery(-1)">
+          &#8592;
+        </button>
+
+        <div class="gallery__main-viewport">
+          <div
+            class="gallery__main-track"
+            [style.transform]="'translateX(-' + currentSlide * 100 + '%)'"
+          >
+            <div class="gallery__main-slide" *ngFor="let image of galleryImages">
+              <img
+                class="gallery__image"
+                [src]="image.src"
+                [alt]="image.alt"
+              />
+            </div>
+          </div>
+        </div>
+
+        <button class="gallery__nav gallery__nav--next" type="button" (click)="moveGallery(1)">
+          &#8594;
+        </button>
+      </div>
+
+      <div class="gallery__thumbs">
+        <div
+          class="gallery__thumb"
+          *ngFor="let image of galleryImages; let i = index"
+          [class.gallery__thumb--active]="i === currentSlide"
+          (click)="goToSlide(i)"
+        >
+          <img
+            class="gallery__thumb-image"
+            [src]="image.src"
+            [alt]="image.alt"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="about__menu-cta">
+      <p class="about__menu-text">Curious about our drinks & offerings?</p>
+      <a routerLink="/menu" class="btn btn--outline">View Our Menu</a>
+    </div>
+  </div>
+</section>

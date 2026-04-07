@@ -1,0 +1,161 @@
+:host {
+  display: block;
+}
+
+/* ── Base Navbar ── */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  height: 66px;
+  background: transparent;
+  transition: background var(--transition), border-bottom var(--transition);
+}
+
+.navbar--scrolled {
+  background: rgba(20, 20, 20, 0.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(200,169,110,0.12);
+}
+
+/* ── Logo ── */
+.navbar__logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+}
+
+/* Photo logo — swap the GC emblem for an actual image */
+.navbar__logo-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid rgba(200,169,110,0.45);
+  transition: border-color var(--transition);
+}
+.navbar__logo:hover .navbar__logo-img {
+  border-color: var(--color-gold);
+}
+
+.navbar__logo-name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.3rem;
+  color: var(--color-text-primary);
+  letter-spacing: 1px;
+}
+
+/* ── Nav Links ── */
+.navbar__links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+
+.navbar__link {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(232,224,208,0.75);
+  position: relative;
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.navbar__link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--color-gold);
+  transition: width var(--transition);
+}
+.navbar__link:hover { color: var(--color-gold); }
+.navbar__link:hover::after { width: 100%; }
+
+/* ── Hamburger — hidden on desktop ── */
+.navbar__hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  z-index: 1100;
+}
+
+.navbar__hamburger span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--color-text-primary);
+  transition: all var(--transition);
+  transform-origin: center;
+}
+
+/* Animate to X when open */
+.navbar__hamburger--open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.navbar__hamburger--open span:nth-child(2) { opacity: 0; }
+.navbar__hamburger--open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── Mobile Styles ── */
+@media (max-width: 768px) {
+
+  .navbar {
+    padding: 0 1.5rem;
+  }
+
+  .navbar__hamburger {
+    display: flex;
+  }
+
+  .navbar__links {
+    position: fixed;
+    top: 66px;
+    left: 0; right: 0;
+    background: rgba(14, 14, 14, 0.97);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .navbar__links--open {
+    max-height: 400px;
+    padding: 16px 0 24px;
+  }
+
+  .navbar__links li {
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar__link {
+    display: block;
+    padding: 14px 0;
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+  }
+
+  .navbar__link::after {
+    display: none;
+  }
+
+  .navbar__logo-name {
+    font-size: 1.1rem;
+  }
+}

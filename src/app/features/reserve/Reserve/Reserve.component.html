@@ -1,0 +1,111 @@
+<section class="reserve" id="reserve">
+  <div class="container">
+    <p class="section__label">Book Your Table</p>
+    <h2 class="section__title">Make a Reservation</h2>
+    <div class="section__divider"></div>
+    <p class="reserve__intro">
+      Select a date within the next 15 days, then choose your preferred start and end time.
+      Maximum reservation is 4 hours. We're open daily from 14:00 to 00:00.
+    </p>
+
+    <div class="reserve-card">
+      <h3 class="reserve-card__title">Reserve a Billiards Table</h3>
+
+      <div class="reserve-card__date-row">
+        <div class="form-group">
+          <label class="form-group__label">Select Date</label>
+          <select class="form-group__select" [(ngModel)]="selectedDate" (change)="onDateChange()">
+            <option value=""> - Choose a date --</option>
+            <option *ngFor="let d of dates" [value]="d.value">
+              {{ d.label }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="reserve-card__times" *ngIf="showTimeSection" id="timeSection">
+        <label class="form-group__label">Select Start & End Time <span class="form-group__label-hint">(max 4h ·
+            14:00–00:00)</span></label>
+        <div class="time-grid" id="timeGrid">
+          <button *ngFor="let slot of slots; let i=index" class="time-btn"
+            [class.time-btn--selected]="i === startSlot || i === endSlot"
+            [class.time-btn--in-range]="startSlot !== null && endSlot !== null && i>startSlot && i<endSlot"
+            (click)="selectTime(i)">
+            {{ slot }}
+          </button>
+        </div>
+
+        <p class="time-grid__hint">
+          {{durationHint}}
+        </p>
+      </div>
+
+      <div class="reserve-card__actions">
+        <button class="btn btn--primary" (click)="submitReservation()">
+          Confirm Reservation
+        </button>
+        <button class="btn btn--ghost" (click)="submitTournament()">Request a Tournament</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tournament Modal -->
+<div class="modal-overlay" id="tournModal" *ngIf="showTournamentModal" [class.modal-overlay--open]="showTournamentModal">
+  <div class="modal">
+    <button class="modal__close" (click)="showTournamentModal = false">✕</button>
+    <h3 class="modal__title">Request a Tournament</h3>
+    <p class="modal__desc">Fill in your details and we'll reach out to plan your event.</p>
+    <input class="modal__input" type="text" placeholder="Your Name" #rName/>
+    <input class="modal__input" type="email" placeholder="Email Address" #rEmail/>
+    <input class="modal__input" type="tel" placeholder="Phone Number" #rPhone/>
+    <input class="modal__input" type="date" placeholder="Preferred Date(s)" #rDates/>
+    <input class="modal__input" type="number" placeholder="Expected number of players" min="4" max="16" #rPlayers/>
+    <textarea class="modal__textarea" placeholder="Additional notes or requests..." rows="4" #rNotes></textarea>
+
+    <div class="modal__actions">
+      <button class="btn btn--primary"
+        (click)="finalTournamentConfirm(
+        rName.value, rEmail.value, rPhone.value, rDates.value, +rPlayers.value, rNotes.value)">Send Request</button>
+      <button class="btn btn--outline"
+      (click)="showTournamentModal = false" >Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Reservation Confirm Modal -->
+<div class="modal-overlay"
+id="confirmModal"
+*ngIf="showReservationModal"
+[class.modal-overlay--open]="showReservationModal"
+>
+  <div class="modal">
+
+    <button class="modal__close" (click)="showReservationModal = false">✕</button>
+    <h3 class="modal__title">Complete Your Reservation</h3>
+
+    <p class="modal__desc">
+      Booking for
+      <strong>{{ selectedDate }}</strong>
+      from
+      <strong>{{ startSlot !== null ? slots[startSlot] : '' }}</strong>
+      to
+      <strong>{{ endSlot !== null ? slots[endSlot] : '' }}</strong>.
+    </p>
+
+    <input class="modal__input" type="text" placeholder="Your Name" #rName/>
+    <input class="modal__input" type="phone" placeholder="Phone Number" #rPhone/>
+
+    <div class="modal__actions">
+      <button class="btn btn--primary"
+        (click)="finalConfirm(rName.value, rPhone.value)">
+      Confirm & Book
+      </button>
+      <button class="btn btn--outline"
+      (click)="showReservationModal = false">
+      Back
+    </button>
+    </div>
+
+  </div>
+</div>

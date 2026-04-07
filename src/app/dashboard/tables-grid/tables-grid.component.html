@@ -1,0 +1,36 @@
+<div class="day-heading">
+  <h1 class="day-heading__title">{{ dayTitle }}</h1>
+  <span class="day-heading__sub">{{ isToday ? 'Today' : '' }}</span>
+</div>
+
+<div class="tables-grid">
+  <div class="table-col" *ngFor="let tableNum of [1,2,3]">
+    <div class="table-col__header">
+      <div class="table-col__icon">{{ tableNum }}</div>
+      <span class="table-col__name">Table {{ tableNum }}</span>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-slot" *ngFor="let slot of allSlots">
+        <span class="timeline-slot__time">{{ slot }}</span>
+
+        <div
+          class="timeline-slot__track"
+          [class.timeline-slot__track--occupied]="isOccupied(tableNum, slot)"
+          [class.timeline-slot__track--active]="isActive(tableNum, slot)"
+        >
+          <div
+            *ngIf="getReservationStartingAt(tableNum, slot) as res"
+            class = "reservation-block"
+            [class.reservation-block--active] = "sessions[res.id]?.running"
+            (click)="openSession(res)"
+          >
+            <span class="reservation-block__name">{{ res.name }}</span>
+            <span class="reservation-block__phone">{{ res.phone }}</span>
+            <span class="reservation-block__time">{{ res.startTime }}–{{ res.endTime }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

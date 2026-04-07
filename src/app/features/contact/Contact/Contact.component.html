@@ -1,0 +1,51 @@
+<section class="contact" id="contact">
+  <div class="container">
+    <p class="section__label">Get In Touch</p>
+    <h2 class="section__title">Contact Us</h2>
+    <div class="section__divider"></div>
+
+    <!-- Info Row -->
+    <div class="contact__info-row">
+      <div class="contact__info-item">
+        <div class="contact__info-icon">📍</div>
+        <h4 class="contact__info-heading">Location</h4>
+        <p class="contact__info-text"> Orde Tuteski 17 <br> Prilep 7500 </p>
+      </div>
+      <div class="contact__info-item">
+        <div class="contact__info-icon">📞</div>
+        <h4 class="contact__info-heading">Phone</h4>
+        <p class="contact__info-text">+389 77 727 503</p>
+      </div>
+      <div class="contact__info-item">
+        <div class="contact__info-icon">✉️</div>
+        <h4 class="contact__info-heading">Email</h4>
+        <p class="contact__info-text">aleksapetreski@hotmail.com</p>
+      </div>
+      <div class="contact__info-item">
+        <div class="contact__info-icon">🕐</div>
+        <h4 class="contact__info-heading">Hours</h4>
+        <p class="contact__info-text">Mon – Sun<br />14:00 – 00:00</p>
+      </div>
+    </div>
+
+    <!-- Form + Map Row -->
+    <div class="contact__bottom-row">
+      <form class="contact-form" onsubmit="submitContact(event)">
+        <div class="contact-form__name-row">
+          <input class="contact-form__input" type="text" placeholder="First Name" required />
+          <input class="contact-form__input" type="text" placeholder="Last Name" required />
+        </div>
+        <input class="contact-form__input" type="email" placeholder="Email Address" required />
+        <textarea class="contact-form__textarea" placeholder="Your message or request..." rows="6" required></textarea>
+        <button type="submit" class="btn btn--primary contact-form__submit">Send Message</button>
+      </form>
+
+      <div class="contact__map">
+        <iframe width="425" height="350"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=21.55318289995194%2C41.34285598774628%2C21.554127037525177%2C41.34459984829789&amp;layer=mapnik"
+          ></iframe><br /><small><a
+            href="https://www.openstreetmap.org/?#map=19/41.343728/21.553655">View Larger Map</a></small>
+      </div>
+    </div>
+  </div>
+</section>
